@@ -4,10 +4,12 @@ sequenceDiagram
 
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
+    Note left of server: executes code for post request
+    server-->>browser: Asks browser to do a new GET request to /exampleapp/notes
+    deactivate server
 
-    Note left of server: 302 Server redirect to fetch HTML document
-
-    server->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
     server-->>browser: HTML document
     deactivate server
 
@@ -25,6 +27,7 @@ sequenceDiagram
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server
+    Note left of server: List of notes sent back as JSON
     server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
     deactivate server
 
