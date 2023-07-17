@@ -13,8 +13,15 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [votes, setVote] = useState(new Array(anecdotes.length).fill(0))
 
-  const handleClick = () => {
+  const handleVote = () => {
+    let updatedVotes = [...votes]
+    updatedVotes[selected]++
+    setVote(updatedVotes)
+  }
+
+  const handleAnecdoteClick = () => {
     let randomNumber = Math.floor(Math.random() * anecdotes.length)
     setSelected(randomNumber)
   }
@@ -24,7 +31,8 @@ const App = () => {
     <div>
       {anecdotes[selected]}
     </div>
-    <button onClick={handleClick}>next anecdote</button>
+    <button onClick={handleVote}>vote</button>
+    <button onClick={handleAnecdoteClick}>next anecdote</button>
     </>
   )
 }
