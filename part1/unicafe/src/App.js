@@ -20,6 +20,7 @@ const Stats = ({good, neutral, bad}) => {
   
   return (
     <>
+      <h1>statistics</h1>
       <div>good {good}</div>
       <div>neutral {neutral}</div>
       <div>bad {bad}</div>
@@ -58,7 +59,6 @@ const App = () => {
       <Button text='good' handleClick={incrementGoodVote}/>
       <Button text='neutral' handleClick={incrementNeutralVote}/>
       <Button text='bad' handleClick={incrementBadVote}/>
-      <h1>statistics</h1>
       <Stats good={good} neutral={neutral} bad={bad}/>
     </div>
   )
