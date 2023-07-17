@@ -6,6 +6,8 @@ const Button = (props) => {
   )
 }
 
+const StatisticLine = ({text, value}) => <div>{text} {value}</div>
+
 const Stats = ({good, neutral, bad}) => {
   let statsDetails = 'No feedback given'
   let sumOfVotes = good + neutral + bad
@@ -15,12 +17,12 @@ const Stats = ({good, neutral, bad}) => {
     average = ((good * 1) + (neutral * 0) + (bad * -1)) / sumOfVotes
     positivePercent = (good / sumOfVotes) * 100;
     statsDetails = <>
-        <div>good {good}</div>
-        <div>neutral {neutral}</div>
-        <div>bad {bad}</div>
-        <div>all {sumOfVotes}</div>
-        <div>average {average}</div>
-        <div>positive {positivePercent} %</div>
+        <StatisticLine text='good' value={good}/>
+        <StatisticLine text='neutral' value={neutral}/>
+        <StatisticLine text='bad' value={bad}/>
+        <StatisticLine text='all' value={sumOfVotes}/>
+        <StatisticLine text='average' value={average}/>
+        <StatisticLine text='positive' value={positivePercent}/>
     </>
   }
   
