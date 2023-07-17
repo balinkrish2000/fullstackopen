@@ -7,26 +7,27 @@ const Button = (props) => {
 }
 
 const Stats = ({good, neutral, bad}) => {
+  let statsDetails = 'No feedback given'
   let sumOfVotes = good + neutral + bad
-  let average = 0
+  let average = 0;  let positivePercent = 0
+
   if (sumOfVotes > 0) {
     average = ((good * 1) + (neutral * 0) + (bad * -1)) / sumOfVotes
-  }
-  
-  let positivePercent = 0;
-  if (sumOfVotes > 0) {
     positivePercent = (good / sumOfVotes) * 100;
+    statsDetails = <>
+        <div>good {good}</div>
+        <div>neutral {neutral}</div>
+        <div>bad {bad}</div>
+        <div>all {sumOfVotes}</div>
+        <div>average {average}</div>
+        <div>positive {positivePercent} %</div>
+    </>
   }
   
   return (
     <>
       <h1>statistics</h1>
-      <div>good {good}</div>
-      <div>neutral {neutral}</div>
-      <div>bad {bad}</div>
-      <div>all {sumOfVotes}</div>
-      <div>average {average}</div>
-      <div>positive {positivePercent} %</div>
+      {statsDetails}
     </>
   )
 }
