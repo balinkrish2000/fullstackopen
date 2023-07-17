@@ -6,10 +6,26 @@ const Button = (props) => {
   )
 }
 
-const Stats = (props) => {
+const Stats = ({good, neutral, bad}) => {
+  let sumOfVotes = good + neutral + bad
+  let average = 0
+  if (sumOfVotes > 0) {
+    average = ((good * 1) + (neutral * 0) + (bad * -1)) / sumOfVotes
+  }
+  
+  let positivePercent = 0;
+  if (sumOfVotes > 0) {
+    positivePercent = (good / sumOfVotes) * 100;
+  }
+  
   return (
     <>
-      <div>{props.text} {props.value}</div>
+      <div>good {good}</div>
+      <div>neutral {neutral}</div>
+      <div>bad {bad}</div>
+      <div>all {sumOfVotes}</div>
+      <div>average {average}</div>
+      <div>positive {positivePercent} %</div>
     </>
   )
 }
@@ -43,9 +59,7 @@ const App = () => {
       <Button text='neutral' handleClick={incrementNeutralVote}/>
       <Button text='bad' handleClick={incrementBadVote}/>
       <h1>statistics</h1>
-      <Stats text='good' value={good}/>
-      <Stats text='neutral' value={neutral}/>
-      <Stats text='bad' value={bad}/>
+      <Stats good={good} neutral={neutral} bad={bad}/>
     </div>
   )
 }
