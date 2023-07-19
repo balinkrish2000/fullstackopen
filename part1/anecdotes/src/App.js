@@ -28,11 +28,14 @@ const App = () => {
 
   return (
     <>
+    <h1>Anecdote of the Day</h1>
     <div>
       {anecdotes[selected]}
     </div>
     <button onClick={handleVote}>vote</button>
     <button onClick={handleAnecdoteClick}>next anecdote</button>
+    <h1>Anecdote with most votes</h1>
+    {anecdotes[votes.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0)]}
     </>
   )
 }
