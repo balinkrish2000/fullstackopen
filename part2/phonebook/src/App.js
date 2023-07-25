@@ -25,6 +25,14 @@ const App = () => {
     setFilterName(event.target.value)
   }
 
+  const handleDelete = (event) => {
+    personService.remove(event.target.value)
+    .then((event.target.value) => {
+      setPersons(persons.filter((person) => person !==  ))
+    })
+    .catch(() => alert('Record not present'))
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
     
@@ -68,7 +76,7 @@ const App = () => {
           onSubmit={handleSubmit}
           />
       <h2>Numbers</h2>
-      <Persons nameList= {nameList}/>
+      <Persons nameList= {nameList} deletePerson={handleDelete}/>
     </div>
   )
 }
