@@ -4,12 +4,14 @@ import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import personService from './services/persons'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filterName, setFilterName] = useState('')
+  const [notifyMessage, setNotifyMessage] = useState({message: '', type: ''})
 
   let nameList = [...persons];
 
@@ -27,14 +29,18 @@ const App = () => {
 
   const handleDelete = (event) => {
     let personId = event.target.value
+    let personName = persons.find((person) => person.id === parseInt(personId)).name
 
-    if (window.confirm(`Delete ${persons.find((person) => person.id === parseInt(personId)).name} ?`)) {
+    if (window.confirm(`Delete ${personName} ?`)) {
       personService.remove(personId)
       .then(() => {
+          setNotifyMessage({message: `Deleted ${personName}`, type: 'notify'})
+          setTimeout(() => setNotifyMessage({message: '', type: ''}), 5000)
           setPersons(persons.filter((person) => person.id !== parseInt(personId)? person : null))
         })
       .catch(() => {
-        alert('Record not present')
+        setNotifyMessage({message: `Record not present`, type: 'error'})
+        setTimeout(() => setNotifyMessage({message: '', type: ''}), 5000)
         setPersons(persons.filter((person) => person.id !== parseInt(personId)? person : null))
       })
     }
@@ -51,7 +57,11 @@ const App = () => {
         }
         let personId = parseInt(persons.find((person) => person.name === newName).id)
         personService.update(personId, updateNameObject)
-        .then(returnedNameObject => setPersons(persons.map((person) => person.id !== returnedNameObject.id ? person : returnedNameObject)))
+        .then(returnedNameObject => {
+          setNotifyMessage({message: `Updated ${returnedNameObject.name}`, type: 'notify'})
+          setTimeout(() => setNotifyMessage({message: '', type: ''}), 5000)
+          setPersons(persons.map((person) => person.id !== returnedNameObject.id ? person : returnedNameObject))
+        })
       }
     } 
     else 
@@ -61,7 +71,11 @@ const App = () => {
         number: newNumber
       }
       personService.create(newNameObject)
-        .then(returnedNameObject => setPersons(persons.concat(returnedNameObject)))
+        .then(returnedNameObject => {
+          setNotifyMessage({message: `Added ${returnedNameObject.name}`, type: 'notify'})
+          setTimeout(() => setNotifyMessage({message: '', type: ''}), 5000)
+          setPersons(persons.concat(returnedNameObject))
+        })
     }
     setNewName('')
     setNewNumber('')
@@ -81,6 +95,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notifyMessage.message} type={notifyMessage.type}/>
       <Filter name={filterName} handleChange={handleFilterNameChange}/>
       <h2>add a new</h2>
       <PersonForm 
