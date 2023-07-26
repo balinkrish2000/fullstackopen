@@ -43,8 +43,16 @@ const App = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
     
-    if (persons.map((person) => person.name).includes(newName)){
-      alert(`${newName} is already added to phonebook`)
+    if (persons.find((person) => person.name === newName)){
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+        const updateNameObject = {
+          name: newName,
+          number: newNumber
+        }
+        let personId = parseInt(persons.find((person) => person.name === newName).id)
+        personService.update(personId, updateNameObject)
+        .then(returnedNameObject => setPersons(persons.map((person) => person.id !== returnedNameObject.id ? person : returnedNameObject)))
+      }
     } 
     else 
     {

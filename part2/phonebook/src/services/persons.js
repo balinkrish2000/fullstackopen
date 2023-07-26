@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'https://balinkrish2000-friendly-goldfish-g7jwqp45756cv6xp-3002.preview.app.github.dev/persons'
+const baseUrl = 'https://balinkrish2000-friendly-goldfish-g7jwqp45756cv6xp-3003.preview.app.github.dev/persons'
 
 const getAll = () => {
     const request = axios.get(baseUrl)
@@ -16,6 +16,11 @@ const remove = id => {
     return request.then(() => id)
 }
 
-const personService = { getAll , create , remove }
+const update = (id, updateObject) => {
+    const request = axios.put(`${baseUrl}/${id}`, updateObject)
+    return request.then(response => response.data)
+}
+
+const personService = { getAll , create , remove , update}
 
 export default personService
