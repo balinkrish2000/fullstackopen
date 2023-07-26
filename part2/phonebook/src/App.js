@@ -39,7 +39,7 @@ const App = () => {
           setPersons(persons.filter((person) => person.id !== parseInt(personId)? person : null))
         })
       .catch(() => {
-        setNotifyMessage({message: `Record not present`, type: 'error'})
+        setNotifyMessage({message: `Information of ${personName} has already been removed from server`, type: 'error'})
         setTimeout(() => setNotifyMessage({message: '', type: ''}), 5000)
         setPersons(persons.filter((person) => person.id !== parseInt(personId)? person : null))
       })
