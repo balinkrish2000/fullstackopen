@@ -26,11 +26,18 @@ const App = () => {
   }
 
   const handleDelete = (event) => {
-    personService.remove(event.target.value)
-    .then((event.target.value) => {
-      setPersons(persons.filter((person) => person !==  ))
-    })
-    .catch(() => alert('Record not present'))
+    let personId = event.target.value
+
+    if (window.confirm(`Delete ${persons.find((person) => person.id === parseInt(personId)).name} ?`)) {
+      personService.remove(personId)
+      .then(() => {
+          setPersons(persons.filter((person) => person.id !== parseInt(personId)? person : null))
+        })
+      .catch(() => {
+        alert('Record not present')
+        setPersons(persons.filter((person) => person.id !== parseInt(personId)? person : null))
+      })
+    }
   }
 
   const handleSubmit = (event) => {
