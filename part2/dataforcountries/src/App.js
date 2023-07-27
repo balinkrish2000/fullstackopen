@@ -22,6 +22,15 @@ function App() {
     setCountryDetails(null)
   }
 
+  const handleShowClick = (event) => {
+    let name = event.target.value
+    countriesService.getOne(name)
+        .then(country => setCountryDetails(country))
+    setFilteredCountries(filteredCountries.filter(country => 
+      country.name.common.search(name) !== -1 ? country.name.common : null))
+    setCountryDetails(null)
+  }
+
   useEffect(() => {
     countriesService.getAll()
       .then(countryList => {
@@ -43,7 +52,7 @@ function App() {
       }  
     } else
     {
-      displaySection = <Countries countryList={filteredCountries}/>
+      displaySection = <Countries countryList={filteredCountries} onClickingShow={handleShowClick}/>
     }
   } else
   {
