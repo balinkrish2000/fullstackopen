@@ -31,6 +31,10 @@ function App() {
     setCountryDetails(null)
   }
 
+  const weatherDetails = (weatherProps) => {
+    console.log(weatherProps)
+  }
+
   useEffect(() => {
     countriesService.getAll()
       .then(countryList => {
@@ -48,7 +52,7 @@ function App() {
           .then(country => setCountryDetails(country))
       } else
       {
-        displaySection = <Country countryDetails={countryDetails}/>
+        displaySection = <Country countryDetails={countryDetails} weatherProps={(props) => weatherDetails(props)}/>
       }  
     } else
     {
