@@ -10,6 +10,9 @@ const Country = ({countryDetails}) => {
             <h3>languages:</h3>
             <ul>{languages.map((language) => <li key={language[0]}>{language[1]}</li>)}</ul>
             <div><font size='50'>{countryDetails.flag}</font></div>
+            <h2>Weather in {countryDetails.capital}</h2>
+            <p>temperature Celcius</p>
+            <p>wind m/s</p>
         </div>
     )
 }
