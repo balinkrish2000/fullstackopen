@@ -1,6 +1,12 @@
 import axios from 'axios'
-// const baseUrl = 'https://balinkrish2000-probable-fishstick-64q7gp9r4xv24557-3000.app.github.dev/api/persons'
-const baseUrl = '/api/persons'
+
+let baseUrl = '';
+
+if (process.env.NODE_ENV === 'development') {
+    baseUrl = 'https://balinkrish2000-probable-fishstick-64q7gp9r4xv24557-3000.app.github.dev/api/persons'
+} else {
+    baseUrl = '/api/persons'
+}
 
 const getAll = () => {
     const request = axios.get(baseUrl)
