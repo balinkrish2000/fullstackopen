@@ -3,7 +3,7 @@ import axios from 'axios'
 let baseUrl = '';
 
 if (process.env.NODE_ENV === 'development') {
-    baseUrl = 'https://zany-palm-tree-g7jwqp4574pcwrjq-3000.app.github.dev/api/persons'
+    baseUrl = 'https://zany-palm-tree-g7jwqp4574pcwrjq-3001.app.github.dev/api/persons'
 } else {
     baseUrl = '/api/persons'
 }
