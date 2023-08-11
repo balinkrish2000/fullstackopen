@@ -29,14 +29,14 @@ const App = () => {
 
   const handleDelete = (event) => {
     let personId = event.target.value
-    let personName = persons.find((person) => person.id === parseInt(personId)).name
+    let personName = persons.find((person) => person.id === personId).name
 
     if (window.confirm(`Delete ${personName} ?`)) {
       personService.remove(personId)
       .then(() => {
           setNotifyMessage({message: `Deleted ${personName}`, type: 'notify'})
           setTimeout(() => setNotifyMessage({message: '', type: ''}), 5000)
-          setPersons(persons.filter((person) => person.id !== parseInt(personId)? person : null))
+          setPersons(persons.filter((person) => person.id !== personId? person : null))
         })
       .catch(() => {
         setNotifyMessage({message: `Information of ${personName} has already been removed from server`, type: 'error'})
