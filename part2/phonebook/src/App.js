@@ -62,6 +62,10 @@ const App = () => {
           setTimeout(() => setNotifyMessage({message: '', type: ''}), 5000)
           setPersons(persons.map((person) => person.id !== returnedNameObject.id ? person : returnedNameObject))
         })
+        .catch(error => {
+          setNotifyMessage({message: error.response.data.error, type: 'error'})
+          setTimeout(() => setNotifyMessage({message: '', type: ''}), 5000)
+        })
       }
     } 
     else 
@@ -75,6 +79,10 @@ const App = () => {
           setNotifyMessage({message: `Added ${returnedNameObject.name}`, type: 'notify'})
           setTimeout(() => setNotifyMessage({message: '', type: ''}), 5000)
           setPersons(persons.concat(returnedNameObject))
+        })
+        .catch(error => {
+          setNotifyMessage({message: error.response.data.error, type: 'error'})
+          setTimeout(() => setNotifyMessage({message: '', type: ''}), 5000)
         })
     }
     setNewName('')
