@@ -55,7 +55,7 @@ const App = () => {
           name: newName,
           number: newNumber
         }
-        let personId = parseInt(persons.find((person) => person.name === newName).id)
+        let personId = persons.find((person) => person.name === newName).id
         personService.update(personId, updateNameObject)
         .then(returnedNameObject => {
           setNotifyMessage({message: `Updated ${returnedNameObject.name}`, type: 'notify'})
